@@ -17,7 +17,7 @@ A simple and secure terminal-based password generator written in Rust. This tool
 Clone the repository and navigate to the project directory:
 
 ```bash
-git clone https://github.com/yourusername/password.generator.git
+git clone https://github.com/zacblev1/password.generator.git
 cd password.generator
 ```
 
