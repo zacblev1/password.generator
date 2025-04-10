@@ -74,7 +74,7 @@ If using the local build:
 
 - `-l, --length <NUMBER>`: Specify the length of the password (default is 16).
 - `-U, --uppercase`: Include uppercase letters (enabled by default).
-- `-l, --lowercase`: Include lowercase letters (enabled by default).
+- `-L, --lowercase`: Include lowercase letters (enabled by default).
 - `-n, --numbers`: Include numbers (enabled by default).
 - `-s, --symbols`: Include special characters (enabled by default).
 - `-i, --interactive`: Run in interactive mode, with prompts for each option.
