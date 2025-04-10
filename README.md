@@ -16,6 +16,8 @@ A simple and secure terminal-based password generator written in Rust. This tool
 
 ## Installation
 
+### Local Installation
+
 Clone the repository and navigate to the project directory:
 
 ```bash
@@ -31,10 +33,39 @@ cargo build --release
 
 This will compile the project and produce an executable in the `target/release` directory.
 
+### Global Installation
+
+To make the password generator available from anywhere on your system, you have two options:
+
+#### Option 1: Install using Cargo
+
+```bash
+cargo install --path .
+```
+
+This will install the executable to your Cargo bin directory (usually `~/.cargo/bin/`), which should be in your PATH.
+
+#### Option 2: Manual installation
+
+After building the release version, create a symbolic link to the executable in a directory that's in your PATH:
+
+For macOS/Linux:
+```bash
+sudo ln -s "$(pwd)/target/release/password-generator" /usr/local/bin/password-generator
+```
+
+For Windows, add the full path to the executable to your PATH environment variable.
+
 ## Usage
 
 Run the password generator from the terminal:
 
+If installed globally:
+```bash
+password-generator [OPTIONS]
+```
+
+If using the local build:
 ```bash
 ./target/release/password-generator [OPTIONS]
 ```
@@ -55,26 +86,28 @@ Run the password generator from the terminal:
 Generate a password with the default settings (16 characters with all character types):
 
 ```bash
-./target/release/password-generator
+password-generator
 ```
 
 Generate a password with a specific length:
 
 ```bash
-./target/release/password-generator --length 24
+password-generator --length 24
 ```
 
 Generate a password with only lowercase letters and numbers:
 
 ```bash
-./target/release/password-generator --no-uppercase --no-symbols
+password-generator --no-uppercase --no-symbols
 ```
 
 Run in interactive mode:
 
 ```bash
-./target/release/password-generator --interactive
+password-generator --interactive
 ```
+
+Note: If using the local build instead of the global installation, prefix commands with `./target/release/`
 
 ## Contributing
 
