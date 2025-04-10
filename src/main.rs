@@ -1,27 +1,54 @@
+use clap::Parser;
 use rand::Rng;
 use std::io;
+
+#[derive(Parser)]
+#[command(author, version, about = "A simple terminal password generator")]
+struct Args {
+    #[arg(short, long, default_value_t = 16)]
+    length: usize,
+
+    #[arg(short = 'U', long, default_value_t = true)]
+    uppercase: bool,
+
+    #[arg(short, long, default_value_t = true)]
+    lowercase: bool,
+
+    #[arg(short, long, default_value_t = true)]
+    numbers: bool,
+
+    #[arg(short, long, default_value_t = true)]
+    symbols: bool,
+
+    #[arg(short, long, default_value_t = false)]
+    interactive: bool,
+}
 
 fn main() {
     println!("🗝️  Terminal Password Generator\n");
 
-    let length = prompt_input("Enter password length: ")
-        .trim()
-        .parse::<usize>()
-        .expect("Please enter a valid number.");
+    let mut args = Args::parse();
 
-    let include_uppercase = confirm("Include uppercase letters? (y/n): ");
-    let include_lowercase = confirm("Include lowercase letters? (y/n): ");
-    let include_numbers = confirm("Include numbers? (y/n): ");
-    let include_symbols = confirm("Include symbols? (y/n): ");
+    if args.interactive {
+        args.length = prompt_input("Enter password length: ")
+            .trim()
+            .parse::<usize>()
+            .unwrap_or(16);
 
-    let charset = build_charset(include_uppercase, include_lowercase, include_numbers, include_symbols);
+        args.uppercase = confirm("Include uppercase letters? (y/n): ");
+        args.lowercase = confirm("Include lowercase letters? (y/n): ");
+        args.numbers = confirm("Include numbers? (y/n): ");
+        args.symbols = confirm("Include symbols? (y/n): ");
+    }
+
+    let charset = build_charset(args.uppercase, args.lowercase, args.numbers, args.symbols);
 
     if charset.is_empty() {
         println!("You must include at least one character set.");
         return;
     }
 
-    let password = generate_password(length, &charset);
+    let password = generate_password(args.length, &charset);
     println!("\nGenerated password: \x1b[1;32m{}\x1b[0m", password); // green bold text
 }
 
