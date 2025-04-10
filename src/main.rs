@@ -11,7 +11,7 @@ struct Args {
     #[arg(short = 'U', long, default_value_t = true)]
     uppercase: bool,
 
-    #[arg(short, long, default_value_t = true)]
+    #[arg(short = 'L', long, default_value_t = true)]
     lowercase: bool,
 
     #[arg(short, long, default_value_t = true)]
